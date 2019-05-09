@@ -62,8 +62,10 @@ T                          get()                    Return this reference object
 引用队列（Reference Queue）
 我们在创建各种引用并关联到响应对象时，可以选择是否需要关联引用队列，JVM 会在特定时机将引用 enqueue 到队列里，我们可以从队列里获取引用（remove 方法在这里实际是有获取的意思）进行相关后续逻辑。尤其是幻象引用，get 方法只返回 null，如果再不指定引用队列，基本就没有意义了利用引用队列，我们可以在对象处于相应状态时（对于幻象引用，就是前面说的被 finalize 了，处于幻象可达状态），执行后期处理逻辑。
 
-
-
+诊断JVM引用情况
+如果你怀疑应用存在引用（或 finalize）导致的回收问题，可以有很多工具或者选项可供选择，
+比如 HotSpot JVM 自身便提供了明确的选项（PrintReferenceGC）去获取相关信息。
+-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintReferenceGC
 
 
 
